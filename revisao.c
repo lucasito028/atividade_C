@@ -1,9 +1,24 @@
+/*Olá professor tudo bem, :)
+Se sim essa é a revisão sobre as aulas de Estruturas de dados
+*/
 #include <stdio.h>
+
+//Contadora mundial
 int i = 0;
+
+//Um struct aluno
+struct Aluno{
+    int nota1;
+    int nota2;
+    char nome[50];
+};
 
 void questao_01();
 
 void questao_02();
+
+void questao_03();
+
 int main()
 {
     //Questão 1
@@ -13,7 +28,8 @@ int main()
     // questao_02();
     
     //Questão 3
-    // questao_03();
+    // 
+    questao_03();
     
     //Questão 4
     // questao_04();
@@ -32,7 +48,7 @@ int main()
 void questao_01(){
     int menor = 0, maior = 0;
     int num[10];
-    float total = 0;
+    float media = 0;
     
     printf("Esse e um sistema de pegar o numero media e maior e menor\n");
     
@@ -51,37 +67,48 @@ void questao_01(){
             if(menor > num[i])
                 menor = num[i];
             
-            total += num[i];
+            media += num[i];
         }
         i++;
     }
     
-    total /= 10;
+    media /= 10;
     
-    printf("Total: %f\n", total);
+    printf("Total: %f\n", media);
     printf("Maior: %d\n", maior);
     printf("Menor: %d\n", menor);
     
 }
 
 void questao_02(){
-    int j = 0;
-    int par[5], impar[5], numbers[30];
+    int j = 0, p = 0, num;
+    int par[5], impar[5];
     
-    while(i < 5 && j < 5){
+    for(i = 0; i < 30; i++){
+        printf("N%d: ", i+1);
+        scanf("%d", &num);
         
-        printf("Numero %d\n", i+1);
-        scanf("%d", &numbers[i]);
-        
-        if(numbers[i] % 2 == 0){
-            par[i] = numbers[i];
-            i++;}
+        if(num % 2 ==0){
+            if(p < 5){
+                par[p] = num;
+                p++;
+            }
+            
+        }
         
         else{
-            impar[i] = numbers[i];
-            j++}
+            if(j < 5){
+                impar[j] = num;
+                j++;}
+            
+        }
+        
+        if(j == 5 && p == 5){
+            i = 30;
+        }
         
     }
+
     
     printf("\n\n");
     
@@ -96,5 +123,16 @@ void questao_02(){
     while(i < 5){
         printf(" %d ", impar[i]);
         i++;
+    }
+}
+
+void questao_03(){
+
+struct Aluno aluno[6];
+float media;
+
+    while (i < 6){
+        printf("Nome do Aluno %d\n", i+1);
+        scanf("%s", aluno[i].nome);  
     }
 }

@@ -1,6 +1,7 @@
 /*Olá professor tudo bem, :)
-Se sim essa é a revisão sobre as aulas de Estruturas de dados
-
+Se sim. essa é a revisão sobre as aulas de Estruturas de dados
+(Se quiser responder só botar a coisa abaixo)
+R:
 */
 #include <stdio.h>
 #include <conio.h>
@@ -12,7 +13,7 @@ Se sim essa é a revisão sobre as aulas de Estruturas de dados
 //Contadora mundial
 int i = 0;
 
-//Um struct aluno
+//Está relacionada a questão 3
 struct Aluno{
     float nota1;
     float nota2;
@@ -52,8 +53,7 @@ int main()
     // questao_05();
     
     //Questão 6
-    // 
-    questao_06();
+    // questao_06();
     
     //Questão 7
     // questao_07();
@@ -288,5 +288,28 @@ void questao_06(){
         i++;
     }
 
+}
 
+void questao_07(){
+    int vetor[10];
+    int pegado;
+
+    srand(time(NULL));
+    printf("Vetores\n");
+
+    for (int i = 0; i < 10; i++) {
+        vetor[i] = (rand() % 9) + 1;
+        printf("%d ", vetor[i]);
+    }
+
+    printf("\nTente encontrar um numero ai\n");
+    scanf("%d", &pegado);
+
+    for (int i = 0; i < 10; i++) {
+        if (pegado == vetor[i]) {
+            printf("Encontrado na Posição: %d\n", i);
+        }
+
+    }
+    
 }

@@ -52,7 +52,8 @@ int main()
     // questao_05();
     
     //Questão 6
-    // questao_06();
+    // 
+    questao_06();
     
     //Questão 7
     // questao_07();
@@ -230,12 +231,12 @@ void questao_04(){
 }
 
 void questao_05(){
-    int matriz[3][3];
+    int matriz[4][3];
     int i, j, pegar; 
 
     srand(time(NULL)); 
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < 4; i++) {
         
         for (j = 0; j < 3; j++) {
             
@@ -248,7 +249,7 @@ void questao_05(){
     printf("Pesquise um Numero \n");
     scanf("%d", &pegar);
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < 4; i++) {
 
         for (j = 0; j < 3; j++) {  
             if(matriz[i][j] == pegar)
@@ -256,6 +257,35 @@ void questao_05(){
                 printf("%d ", matriz[i][j]); 
         }
         printf("\n");
+    }
+
+
+}
+
+void questao_06(){
+    int vetor[10], invertdo[10];
+    int i = 0, j = 9; 
+
+    srand(time(NULL));
+
+    while(i < 10){
+        vetor[i] = (rand() % 9) + 1;
+        invertdo[j] = vetor[i];
+        j--;
+        i++;
+    }
+    
+    i = 0;
+    printf("Normal:\n");
+    while(i < 10){
+        printf("%d ", vetor[i]);
+        i++;
+    }
+    i = 0;
+    printf("\nInvertido:\n");
+    while(i < 10){
+        printf("%d ", invertdo[i]);
+        i++;
     }
 
 

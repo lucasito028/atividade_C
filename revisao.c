@@ -3,8 +3,10 @@ Se sim essa é a revisão sobre as aulas de Estruturas de dados
 
 */
 #include <stdio.h>
-#include <stdio.h>
-#include <string.h>
+#include <conio.h>
+#include <locale.h>
+#include <time.h>
+#include <stdlib.h>
 
 //Contadora mundial
 int i = 0;
@@ -21,6 +23,8 @@ void questao_01();
 void questao_02();
 
 void questao_03();
+
+void questao_04();
 
 int main()
 {
@@ -130,12 +134,12 @@ void questao_02(){
 
 void questao_03(){
 
-struct Aluno aluno[6];
+    struct Aluno aluno[6];
 
-int aprovado, reprovado, exame;
+    int aprovado, reprovado, exame;
 
-float media, meta;
-char final[10];
+    float media, meta;
+    char final[10];
 
     while (i < 6){
 
@@ -173,9 +177,11 @@ char final[10];
         
         i+=1;
     }
+    
     printf("Aprovado: %d\n", aprovado);
     printf("Exame: %d\n", exame);
     printf("Reprovados: %d\n", reprovado);
     
     printf("Média da classe %f\n", media/i);
 }
+

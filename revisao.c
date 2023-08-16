@@ -7,6 +7,7 @@ Se sim essa é a revisão sobre as aulas de Estruturas de dados
 #include <locale.h>
 #include <time.h>
 #include <stdlib.h>
+#include <string.h>
 
 //Contadora mundial
 int i = 0;
@@ -25,6 +26,13 @@ void questao_02();
 void questao_03();
 
 void questao_04();
+
+void questao_05();
+
+void questao_06();
+
+void questao_07();
+
 
 int main()
 {
@@ -185,3 +193,70 @@ void questao_03(){
     printf("Média da classe %f\n", media/i);
 }
 
+void questao_04(){
+    
+    int matriz[3][3];
+    int i, j, pegar, maior, menor; 
+
+    srand(time(NULL)); 
+
+    for (i = 0; i < 3; i++) {
+        
+        for (j = 0; j < 3; j++) {
+            
+            matriz[i][j] = (rand() % 9) + 1;
+            printf("%d ", matriz[i][j]); 
+        }
+        printf("\n");
+    }
+
+    printf("Pesquise um Numero \n");
+    scanf("%d", &pegar);
+
+    for (i = 0; i < 3; i++) {
+
+        for (j = 0; j < 3; j++) {  
+            if(matriz[i][j] > pegar)
+                maior +=1;
+            else if(matriz[i][j] < pegar)
+                menor +=1;
+        }
+
+    }
+
+    printf("Maiores são: %d\n", maior);
+    printf("Menores são: %d\n", menor);
+
+}
+
+void questao_05(){
+    int matriz[3][3];
+    int i, j, pegar; 
+
+    srand(time(NULL)); 
+
+    for (i = 0; i < 3; i++) {
+        
+        for (j = 0; j < 3; j++) {
+            
+            matriz[i][j] = (rand() % 9) + 1;
+            printf("%d ", matriz[i][j]); 
+        }
+        printf("\n");
+    }
+
+    printf("Pesquise um Numero \n");
+    scanf("%d", &pegar);
+
+    for (i = 0; i < 3; i++) {
+
+        for (j = 0; j < 3; j++) {  
+            if(matriz[i][j] == pegar)
+                matriz[i][j] = 0;
+                printf("%d ", matriz[i][j]); 
+        }
+        printf("\n");
+    }
+
+
+}

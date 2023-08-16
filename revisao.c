@@ -1,16 +1,18 @@
 /*Olá professor tudo bem, :)
 Se sim essa é a revisão sobre as aulas de Estruturas de dados
-Attividade do ponce
+
 */
 #include <stdio.h>
+#include <stdio.h>
+#include <string.h>
 
 //Contadora mundial
 int i = 0;
 
 //Um struct aluno
 struct Aluno{
-    int nota1;
-    int nota2;
+    float nota1;
+    float nota2;
     char nome[50];
 };
 
@@ -29,8 +31,7 @@ int main()
     // questao_02();
     
     //Questão 3
-    // 
-    questao_03();
+    // questao_03();
     
     //Questão 4
     // questao_04();
@@ -130,10 +131,51 @@ void questao_02(){
 void questao_03(){
 
 struct Aluno aluno[6];
-float media;
+
+int aprovado, reprovado, exame;
+
+float media, meta;
+char final[10];
 
     while (i < 6){
+
         printf("Nome do Aluno %d\n", i+1);
         scanf("%s", aluno[i].nome);  
+
+        printf("Nota %d do Aluno %d\n", 1, i+1);
+        scanf("%f", & aluno[i].nota1);
+
+        printf("Nota %d do Aluno %d\n", 2, i+1);
+        scanf("%f", & aluno[i].nota2);
+
+        meta = (aluno[i].nota1 +  aluno[i].nota2);
+        meta /= 2;
+        
+        if(meta >= 7 ){
+            strcpy(final, "Aprovado");
+            aprovado += 1;
+        }
+
+        else if(meta < 7 && meta > 3){
+            strcpy(final, "Exame");
+            exame += 1;
+        }
+
+        else if(meta < 3){
+             strcpy(final, "Reprovado");
+             reprovado += 1;
+        }
+        
+        printf("Media: %f\n", meta);
+        printf("Está %s\n\n", final);
+        
+        media += meta;
+        
+        i+=1;
     }
+    printf("Aprovado: %d\n", aprovado);
+    printf("Exame: %d\n", exame);
+    printf("Reprovados: %d\n", reprovado);
+    
+    printf("Média da classe %f\n", media/i);
 }

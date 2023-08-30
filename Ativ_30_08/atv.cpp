@@ -51,7 +51,7 @@ int main(void){
 
 void inicializa(lista *cartas){
     cartas->prox = NULL;
-    printf("Lista cartas inicalizada");
+    printf("Lista cartas inicalizada\n");
 }
 
 

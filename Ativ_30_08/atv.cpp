@@ -29,6 +29,16 @@ void remover_final(lista *cartas);
 
 void montrar_tamanho(lista *cartas);
 
+void limpar_lista(lista *cartas);
+
+void mostrar_elemento(lista *cartas);
+
+void adicionar_carta(lista *cartas);
+
+void adicionar_escolhendo(lista *cartas);
+
+void remover_escolhido(lista *cartas);
+
 
 
 int main(void){
@@ -60,7 +70,7 @@ int main(void){
     
 	int p = 0;
 	
-	while(p < 3){
+	while(p < 5){
 		adicionar_incio(cartas);
 		p++;	
 	}
@@ -68,18 +78,31 @@ int main(void){
 
     mostrar_lista(cartas);
 
+    montrar_tamanho(cartas);
+
     remover_incio(cartas);
 
-    mostrar_lista(cartas);
+    montrar_tamanho(cartas);
+
+    adicionar_escolhendo(cartas);
+
+    mostrar_elemento(cartas);
+    
+    printf("\n\n");
+
+    mostrar_elemento(cartas);
 
     remover_final(cartas);
 
     mostrar_lista(cartas);
 
-    montrar_tamanho(cartas);
+   	limpar_lista(cartas);
+
 
     free(cartas);
+
     return 0;
+
 }
 
 void inicializa(lista *cartas){
@@ -175,16 +198,117 @@ void remover_final(lista *cartas){
 }
 
 void montrar_tamanho(lista *cartas){
-    if(checa_lista(cartas)){
-        printf("Lista Vazia\n");
-        return ;
+
+    int p = 0;
+
+    while (cartas->prox != NULL){
+        cartas = cartas->prox;
+        p++;
     }
+    
+    printf("\nTotal %d:\n", p);
 
-    lista *aux = cartas->prox;
+}
 
-    int k = 0;
-    while(aux != NULL){
+void limpar_lista(lista *cartas){
+
+        if(!checa_lista(cartas)){
+
+            lista *aux, *atual, *head;
+
+            head = cartas;
+            atual = cartas->prox;
+
+            while(atual->prox != NULL){
+
+                aux = atual -> prox;
+
+                free(atual);
+
+                atual = aux;
+            }
+            if(atual -> prox == NULL){
+
+            head -> prox = NULL;
+
+            free(atual);
+        }
+
+            printf("\nEsta limpo\n");
+
+        }
+
+}
+
+void mostrar_elemento(lista *cartas){
+
+    int enc, p = 0, k = 0;
+
+    printf("\nAgora fala um valor e irei procurar onde está:\n");
+    scanf("%d", &enc);
+
+     while (cartas -> prox != NULL){
+        cartas = cartas->prox;
+        
+        if(cartas->valor == enc){
+              p++;
+              printf("\n\nFoi encontrado na posicao %d \n", k+1);
+        }
         k++;
     }
-    printf("\nTems %d", k);
+
+    if(p == 0){
+        printf("Nao foi encontrado Nada\n");
+    }else{
+        printf("O numero %d foi encontrado em %d posicoes\n", enc, p);
+    }
+
+
+}
+
+void adicionar_escolhendo(lista *cartas){
+
+    int posicao;
+    
+    printf("Digite a posicao onde deseja inserir o novo numero: ");
+    scanf("%d", &posicao);
+    
+    if (posicao < 1) {
+        printf("Posicao invalida. Insira uma posicao valida maior que 0.\n");
+        return;
+    }
+    
+    lista *novo = (lista *)malloc(sizeof(lista));
+    
+    if (!novo) {
+        printf("Impossivel alocar memoria para o novo elemento.\n");
+        return;
+    }
+    
+    printf("Digite o valor a ser inserido: ");
+    scanf("%d", &novo->valor);
+    
+    lista *atual = cartas;
+    int contador = 0;
+    
+    while (atual->prox != NULL && contador < posicao - 1) {
+        atual = atual->prox;
+        contador++;
+    }
+    
+    if (contador < posicao - 1) {
+        printf("Posicao excede o tamanho atual da lista. O numero sera adicionado no final.\n");
+    }
+    
+    novo->prox = atual->prox;
+    atual->prox = novo;
+    
+    printf("Numero %d inserido na posicao %d.\n", novo->valor, posicao);
+
+}
+
+void remover_escolhido(lista *cartas){
+    printf("Agora o que acontece: escolha a posicao de uma carta a ser removida\n\n");
+    mostrar_lista(cartas);
+    printf("\n\n");
 }

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 struct No
 {
     int valor;
@@ -12,6 +13,7 @@ struct No
 typedef struct No lista;
 
 
+void menu(lista *cartas);
 
 void inicializa(lista *cartas);
 
@@ -27,7 +29,7 @@ void remover_incio(lista *cartas);
 
 void remover_final(lista *cartas);
 
-void montrar_tamanho(lista *cartas);
+int montrar_tamanho(lista *cartas);
 
 void limpar_lista(lista *cartas);
 
@@ -39,9 +41,11 @@ void adicionar_escolhendo(lista *cartas);
 
 void remover_escolhido(lista *cartas);
 
+void organizar_baralho(lista *cartas);
 
 
-int main(void){
+
+int main(){
 
     lista *cartas = (lista *) malloc(sizeof(lista));
 
@@ -56,54 +60,89 @@ int main(void){
     inicializa(cartas);
 
 
-    int i = checa_lista(cartas);
-
-    if(i == 1)
-        printf("Lista vazia\n");
-
-    else if ( i == 0){
-        printf("Lista nao vazia\n");
-    }
-
-
-    adiciona_fim(cartas);
-    
-	int p = 0;
-	
-	while(p < 5){
-		adicionar_incio(cartas);
-		p++;	
-	}
-    
-
-    mostrar_lista(cartas);
-
-    montrar_tamanho(cartas);
-
-    remover_incio(cartas);
-
-    montrar_tamanho(cartas);
-
-    adicionar_escolhendo(cartas);
-
-    mostrar_elemento(cartas);
-    
-    printf("\n\n");
-
-    mostrar_elemento(cartas);
-
-    remover_final(cartas);
-
-    mostrar_lista(cartas);
-
-   	limpar_lista(cartas);
-
-
-    free(cartas);
+    menu(cartas);
 
     return 0;
 
 }
+
+
+void menu(lista *cartas){
+
+    int co = 1, op, i;
+
+    while(co != 0){
+
+        printf("Seleciona as opecoes\n");
+        scanf("%d", &op);
+        switch(op){
+
+            case 1:
+                i = checa_lista(cartas);
+
+                if(i == 1)
+                    printf("Lista vazia\n");
+
+                else if ( i == 0){
+                    printf("Lista nao vazia\n");
+                }
+
+                break;
+
+            case 2:
+                adiciona_fim(cartas);
+                break;
+
+            case 3:
+                adicionar_incio(cartas);
+                break;
+
+            case 4:
+                remover_incio(cartas);
+                break;
+
+            case 5:
+                remover_final(cartas);
+                break;
+
+            case 6:
+                montrar_tamanho(cartas);
+                break;
+
+            case 7:
+                mostrar_elemento(cartas);
+                break;
+
+            case 8:
+                adicionar_carta(cartas);
+                break;
+
+            case 9:
+                adicionar_escolhendo(cartas);
+                break;
+
+            case 10:
+                remover_escolhido(cartas);
+                break;
+
+            case 11:
+                organizar_baralho(cartas);
+                break;
+
+            case 12:
+                limpar_lista(cartas);
+                break;
+
+            case 21:
+                co = 0;
+                break;
+
+
+    }
+
+    }
+}
+
 
 void inicializa(lista *cartas){
     cartas->prox = NULL;
@@ -117,6 +156,7 @@ int checa_lista(lista *cartas){
     else 
         return 0;
 }
+
 
 void adiciona_fim(lista *cartas){
     lista *novo = (lista *) malloc(sizeof(lista));
@@ -146,6 +186,7 @@ void adiciona_fim(lista *cartas){
     }
 
 }
+
 
 void mostrar_lista(lista *cartas){
 
@@ -181,12 +222,14 @@ void adicionar_incio(lista *cartas){
 
 }
 
+
 void remover_incio(lista *cartas){
     lista *aux = cartas->prox;
     printf("Removendo o primeiro elemento do bralago\n");
     cartas->prox = cartas->prox -> prox;
     free(aux);
 }
+
 
 void remover_final(lista *cartas){
     while(cartas->prox->prox != NULL){
@@ -197,7 +240,8 @@ void remover_final(lista *cartas){
     printf("Removendo o ultimo elemento \n");
 }
 
-void montrar_tamanho(lista *cartas){
+
+int montrar_tamanho(lista *cartas){
 
     int p = 0;
 
@@ -206,9 +250,10 @@ void montrar_tamanho(lista *cartas){
         p++;
     }
     
-    printf("\nTotal %d:\n", p);
+    return p;
 
 }
+
 
 void limpar_lista(lista *cartas){
 
@@ -240,11 +285,12 @@ void limpar_lista(lista *cartas){
 
 }
 
+
 void mostrar_elemento(lista *cartas){
 
     int enc, p = 0, k = 0;
 
-    printf("\nAgora fala um valor e irei procurar onde está:\n");
+    printf("\nAgora fala um valor e irei procurar onde estÃ¡:\n");
     scanf("%d", &enc);
 
      while (cartas -> prox != NULL){
@@ -265,6 +311,7 @@ void mostrar_elemento(lista *cartas){
 
 
 }
+
 
 void adicionar_escolhendo(lista *cartas){
 
@@ -307,8 +354,71 @@ void adicionar_escolhendo(lista *cartas){
 
 }
 
+
 void remover_escolhido(lista *cartas){
-    printf("Agora o que acontece: escolha a posicao de uma carta a ser removida\n\n");
+    int cont = 1, pos, i;
+
+    lista *aux = cartas;
+
+    lista *ant = cartas;
+
+    i = montrar_tamanho(cartas);
+
+    printf("Qual posisao de (1 a %d) deseja remover\n", i);
+
+    scanf("%d", &pos);
+
+    if(pos > 0 && pos <= i){
+        while (cont <= pos)
+        { ant = aux;
+        aux = aux->prox;
+
+        if(cont == pos){
+            ant->prox = aux->prox;
+            free(aux);
+        }
+        cont++;
+
+        }
+    }
+    if(cont == 0)
+        printf("NÃ£o foi encontrado nada");
+
+
+
+}
+
+
+void organizar_baralho(lista *cartas){
+
+    lista *f, *k;
+
+    f = cartas->prox;
+
+    while(f != NULL){
+
+        k = f->prox;
+
+            while(k != NULL){
+
+                if(k->valor > k->valor){
+
+                    int p = f->valor;
+                    f->valor = k->valor;
+                    k->valor = p;
+
+                }
+
+                k = k->prox;
+
+            }
+
+            f = k->prox;
+        
+    }
+
+    printf("Baralho organizado\n");
+
     mostrar_lista(cartas);
-    printf("\n\n");
+
 }
